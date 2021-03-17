@@ -1,10 +1,5 @@
 # Home Construction Application
 
-## Group: 2020 - 167
-## Student/Member Details: 
-- ### Heshan E.K.P. - IT17143028
-
-
 ## Carpenter and Mason  component
 ### Introduction
 
