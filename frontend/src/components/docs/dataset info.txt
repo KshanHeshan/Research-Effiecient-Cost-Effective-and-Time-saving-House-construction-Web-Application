@@ -1,0 +1,17 @@
+id
+timber_type
+job_type
+total_meters
+total_carpentry_cost
+
+id
+job_type
+total_meters
+total_masonry_cost
+
+id
+no_floors
+total_square_meters
+total_carpentry_cost
+total_masonry_cost
+total_cost

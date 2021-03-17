@@ -1,0 +1,164 @@
+import React, { Component } from 'react';
+import UserImage from '../css/img/male_default.jpg';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
+import {FaArrowCircleLeft, FaArrowCircleRight} from 'react-icons/fa';
+
+function searchingForName(term){
+    return function(x){
+        // return x.carpenter_name.toLowerCase().includes(term.toLowerCase()) || !term;
+        return x.carpenter_name.toLowerCase().includes(term.toLowerCase()) || !term;
+    }
+}
+
+function searchingForAddress(term2){
+    return function(y){
+        // return y.carpenter_address.toLowerCase().includes(term2.toLowerCase()) || !term2;
+        return y.carpenter_address.toLowerCase().includes(term2.toLowerCase()) || !term2;
+    }
+}
+
+function searchingForPriceRate(term3){
+    return function(z){
+        // return z.price_rate.toLowerCase().includes(term3.toLowerCase()) || !term3;
+        // return z.price_rate.toLowerCase().includes(term3.toLowerCase()) || !term3;
+    }
+}
+
+function searchingForJobSpecification(term4){
+    return function(u){
+        return u.job_specifi.toLowerCase().includes(term4.toLowerCase()) || !term4;
+    }
+}
+
+export default class CarpenterSearch2 extends Component {
+    
+    constructor(props) 
+    {
+        super(props);
+        this.state={
+            carpenters: [],
+            term: '',
+            term2:'',
+            term3:'',
+            term4:''
+        }
+        this.searchHandler = this.searchHandler.bind(this);
+        this.searchHandler2 = this.searchHandler2.bind(this);
+        this.searchHandler3 = this.searchHandler3.bind(this);
+        this.searchHandler4 = this.searchHandler4.bind(this);
+    }
+
+    searchHandler(event){
+        this.setState({term: event.target.value})
+    }
+
+    searchHandler2(event2){
+        this.setState({term2: event2.target.value})
+    }
+
+    searchHandler3(event3){
+        this.setState({term3: event3.target.value})
+    }
+
+    searchHandler4(event4){
+        this.setState({term4: event4.target.value})
+    }
+
+    componentDidMount() 
+    {
+        axios.get('http://127.0.0.1:8000/api/carpenters')
+        .then(response=>{ console.log(response);});
+    }
+
+    render() {
+        return (
+            <main className="main text-center">
+
+                <h1>Carpenters Search Filter</h1>
+                <hr/>
+                <div className="form-group">
+                    <form>
+                        <div className="row">
+                            <div className="col-md-6 mb-3 search_filter_inputs">
+                                <input type="text" className="form-control" id="name" placeholder="Search by name...." value={this.state.term} onChange={this.searchHandler} />
+                            </div>
+                            <div className="col-md-6 mb-3 search_filter_inputs">
+                                <input type="text" className="form-control" id="address" placeholder="Search by address...." value={this.state.term2} onChange={this.searchHandler2} />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6 mb-3 search_filter_inputs">
+                                <input type="text" className="form-control" id="priceRate" placeholder="Search by Price Rate...." value={this.state.term3} onChange={this.searchHandler3} />
+                            </div>
+                            <div className=" col-md-6 mb-3 search_filter_inputs">
+                                <select className="custom-select" name="no_floors" id="inputGroupSelect01" value={this.state.term4} onChange={this.searchHandler4}>
+                                    <option defaultValue>Select a Job Specification....</option>
+                                    <option value="only interior">Only Interior</option>
+                                    <option value="only roof">Only Roof</option>
+                                    <option value="both">Both Interior and Roof</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <hr/> 
+                <div className="row text-center">
+                            {
+                                this.state.carpenters.filter(searchingForName(this.state.term)).filter(searchingForAddress(this.state.term2)).filter(searchingForPriceRate(this.state.term3)).filter(searchingForJobSpecification(this.state.term4)).map( carpenter => 
+
+                                        <div className="user_card" key={carpenter.id}>
+                                            <div className="user_card-header">
+                                                <div className="animated_wave-bg">
+                                                    <div className="animated_wave-01"></div>
+                                                    <div className="animated_wave-02"></div>
+                                                    <div className="animated_wave-03"></div>
+                                                </div>
+                        
+                                                <div className="user_profile_pic-content">
+                                                    <img className="user_profile_pic" src={UserImage} alt=""/>
+                                                </div>
+                                            </div>
+                        
+                                            <div className="user_card-content">
+                                                <div className="user_name">
+                                                    <h4>{carpenter.carpenter_name}</h4>
+                                                </div>
+                                                <div className="user_info">
+                                                    <h5><b>E-Mail : </b>{carpenter.carpenter_email}</h5>
+                                                    <h5><b>Speciality : </b>{carpenter.job_specifi}</h5>
+                                                    <h5><b>Price Rate : </b>{carpenter.price_rate}</h5>
+                                                </div>
+                                                
+                                                {/* <div className="user_social-media">
+                                                    <a href="#"><i className="fab fa-github" aria-hidden="true"></i></a>
+                                                    <a href="#"><i className="fab fa-twitter" aria-hidden="true"></i></a>
+                                                    <a href="#"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+                                                    <a href="#"><i className="fab fa-youtube" aria-hidden="true"></i></a>
+                                                    <a href="#"><i className="fab fa-linkedin" aria-hidden="true"></i></a>
+                                                </div> */}
+                                                <a href="/#" className="user_card-button">Select</a>&nbsp;
+                                                <Link to={`carpenters/${carpenter.id}`} className="btn btn-success">View</Link>
+                                            </div>
+                                        </div>
+
+                                    )
+                                
+                            }
+                </div>
+                <hr/>  
+                <br/>
+                <div className="row col-12">
+                    <div className="text-right left_btn col-4">
+                        <Link className="" to="/carpenter_cost_predict"><FaArrowCircleLeft className="arrow_left_btn"/></Link> Carpentry Cost Prediction
+                    </div>
+                    <div className="col-4"></div>
+                    <div className="text-right right_btn col-4">
+                        Masonry Cost Prediction <Link className="" to="/mason_cost_predict"><FaArrowCircleRight className="arrow_right_btn"/></Link>
+                    </div>
+                </div>         
+                
+            </main>
+        )
+    }
+}

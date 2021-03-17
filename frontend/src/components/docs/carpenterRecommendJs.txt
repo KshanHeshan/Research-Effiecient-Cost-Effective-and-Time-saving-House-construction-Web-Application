@@ -1,0 +1,119 @@
+import React, { Component } from 'react';
+import {FaArrowCircleLeft, FaArrowCircleRight} from 'react-icons/fa';
+import {Link} from 'react-router-dom';
+import userLogo from '../css/img/male_default.jpg';
+
+export class CarpenterRecommend extends Component {
+
+    
+    continue = e => {
+        e.preventDefault();
+        this.props.nextStep();
+    }
+
+    back = e => {
+        e.preventDefault();
+        this.props.prevStep();
+    }
+
+    render() {
+        return (
+            <main className="main"> 
+            <div className="carp_recom_box">
+                <div className="content">
+                    <div className="text-center">
+                        <h1><b>Carpenters Recommendation System</b></h1>
+                        <h4>For you, we recommend the following carpenters</h4>
+                    </div>
+                    <br />
+                    <div>
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th className="text-left"><h5><b>Carpenter</b></h5></th>
+                                    <th className="text-center"><h5><b>Action</b></h5></th>
+                                    <th className="text-right"><h5><b>Rating</b></h5></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className="user">
+                                    <td><img className="userImage" src={userLogo} alt="" /> &nbsp; Mr. Sugathapala</td>
+                                    <td className="text-center"><a className="btn-sm btn btn-success" href="/#">View Profile</a></td>
+                                    <td className="text-right">
+                                        <div className="star-outer">
+                                            <div className="star-inner"></div><br/>
+                                            <div className="text-center">5.0</div>
+                                        </div>
+                                        <span className="number-rating"></span>
+                                    </td>
+                                </tr>
+                                <tr className="user">
+                                    <td><img className="userImage" src={userLogo} alt="" /> &nbsp; Mr. Namal</td>
+                                    <td className="text-center"><a className="btn-sm btn btn-success" href="/#">View Profile</a></td>
+                                    <td className="text-right">
+                                        <div className="star-outer">
+                                            <div className="star-inner"></div><br/>
+                                            <div className="text-center">5.0</div>
+                                        </div>
+                                        <span className="number-rating"></span>
+                                    </td>
+                                </tr>
+                                <tr className="user">
+                                    <td><img className="userImage" src={userLogo} alt="" /> &nbsp; Mrs. Chandhani</td>
+                                    <td className="text-center"><a className="btn-sm btn btn-success" href="/#">View Profile</a></td>
+                                    <td className="text-right">
+                                        <div className="star-outer">
+                                            <div className="star-inner"></div><br/>
+                                            <div className="text-center">5.0</div>
+                                        </div>
+                                        <span className="number-rating"></span>
+                                    </td>
+                                </tr>
+                                <tr className="user">
+                                    <td><img className="userImage" src={userLogo} alt="" /> &nbsp; Mr. Madhumadhawa</td>
+                                    <td className="text-center"><a className="profileBtn btn-sm btn btn-success" href="/#">View Profile</a></td>
+                                    <td className="text-right">
+                                        <div className="star-outer">
+                                            <div className="star-inner"></div><br/>
+                                            <div className="text-center">5.0</div>
+                                        </div>
+                                        <span className="number-rating"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+                    {/* <div class="recommend">
+                        <div class="recommendation_box">
+                            <div class="users">
+                                <div class="user col-sm-12">
+                                    <div class="col-sm-3">
+                                        <img src="css/edhashd" alt="" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h3>Name : Mr. Sugathapala</h3>
+                                        <h4>Experience : 10 Years </h4>
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> */}
+                </div>
+                <div className="row col-12">
+                    <div className="text-right left_btn col-4">
+                        <Link className="" to="#"  onClick={this.back}><FaArrowCircleLeft className="arrow_left_btn"/></Link> Carpentry Cost
+                    </div>
+                    <div className="col-4"></div>
+                    <div className="text-right right_btn col-4">
+                        Mason Cost <Link className="" to="#"  onClick={this.continue}><FaArrowCircleRight className="arrow_right_btn"/></Link>
+                    </div>
+                </div>
+
+   </main>
+        )
+    }
+}
+
+export default CarpenterRecommend
